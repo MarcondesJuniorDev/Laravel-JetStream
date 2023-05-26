@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Menu04Controller;
+use App\Http\Controllers\Menu05Controller;
+use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,4 +29,11 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+});
+
+Route::group(['middleware' => 'auth'], function (){
+    Route::resource('tasks', TaskController::class);
+    Route::resource('orders', OrdersController::class);
+    Route::resource('menu04', Menu04Controller::class);
+    Route::resource('menu05', Menu05Controller::class);
 });
